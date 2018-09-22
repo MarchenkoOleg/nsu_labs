@@ -1,6 +1,8 @@
 #include <iostream>
+#include "HashTable.h"
+#include "gtest/gtest.h"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
+TEST(BasicTest, TestName) {
+    EXPECT_EQ(1, 1);
 }
