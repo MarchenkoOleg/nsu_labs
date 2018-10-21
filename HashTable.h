@@ -12,27 +12,35 @@ struct Value {
     unsigned weight;
 };
 
-class HashTable
-{
+struct Node {
+    Value val;
+    Node *next;
+};
+
+class HashTable {
+private:
+    int table_size;
+    std::vector<Node> table;
 public:
-
-
-
+    HashTable(int size);
     ~HashTable();
-
+    int size() const;
     HashTable(const HashTable& b);
+    void swap(HashTable& b);
+    HashTable& operator=(const HashTable& b);
+    void clear();
+/*
+
 
 
     // Обменивает значения двух хэш-таблиц.
     // Подумайте, зачем нужен этот метод, при наличии стандартной функции
     // std::swap.
-    void swap(HashTable& b);
 
-    HashTable& operator=(const HashTable& b);
 
 
     // Очищает контейнер.
-    void clear();
+
     // Удаляет элемент по заданному ключу.
     bool erase(const Key& k);
     // Вставка в контейнер. Возвращаемое значение - успешность вставки.
@@ -44,17 +52,18 @@ public:
     // Возвращает значение по ключу. Небезопасный метод.
     // В случае отсутствия ключа в контейнере, следует вставить в контейнер
     // значение, созданное конструктором по умолчанию и вернуть ссылку на него.
-    Value& operator[](const Key& k);
+Value& operator[](const Key& k);
 
     // Возвращает значение по ключу. Бросает исключение при неудаче.
     Value& at(const Key& k);
     const Value& at(const Key& k) const;
 
-    size_t size() const;
     bool empty() const;
 
     friend bool operator==(const HashTable & a, const HashTable & b);
     friend bool operator!=(const HashTable & a, const HashTable & b);
+*/
+
 };
 
 #endif //INC_17209_MARCHENKO_HASHTABLE_HASHTABLE_H
