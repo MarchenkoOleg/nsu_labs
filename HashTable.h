@@ -1,9 +1,14 @@
-//
-// Created by march on 22.09.2018.
-//
-
 #ifndef INC_17209_MARCHENKO_HASHTABLE_HASHTABLE_H
 #define INC_17209_MARCHENKO_HASHTABLE_HASHTABLE_H
+
+#define  DEFAULT_CAPACITY 15 // static сделать TODO
+#define  PARTS 2
+
+#include <limits>
+#include <list>   //???
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 typedef std::string Key;
 
@@ -12,58 +17,57 @@ struct Value {
     unsigned weight;
 };
 
-struct Node {
+struct Tmp { ///????????
+    Key key;
     Value val;
-    Node *next;
+    Tmp(const Key &k, const Value &v) : key(k), val(v) {}
 };
 
 class HashTable {
-private:
-    int table_size;
-    std::vector<Node> table;
 public:
-    HashTable(int size);
+    HashTable();
     ~HashTable();
-    int size() const;
-    HashTable(const HashTable& b);
-    void swap(HashTable& b);
-    HashTable& operator=(const HashTable& b);
-    void clear();
-/*
 
-
+    HashTable(const HashTable &b);
 
     // Обменивает значения двух хэш-таблиц.
     // Подумайте, зачем нужен этот метод, при наличии стандартной функции
     // std::swap.
+    void swap(HashTable &b);
 
-
+    HashTable &operator=(const HashTable &b);
 
     // Очищает контейнер.
-
+    void clear();
     // Удаляет элемент по заданному ключу.
-    bool erase(const Key& k);
+    bool erase(const Key &k);
     // Вставка в контейнер. Возвращаемое значение - успешность вставки.
-    bool insert(const Key& k, const Value& v);
+    bool insert(const Key &k, const Value &v);
 
     // Проверка наличия значения по заданному ключу.
-    bool contains(const Key& k) const;
+    bool contains(const Key &k) const;
 
-    // Возвращает значение по ключу. Небезопасный метод.
+    // Возвращаеhalfт значение по ключу. Небезопасный метод.
     // В случае отсутствия ключа в контейнере, следует вставить в контейнер
     // значение, созданное конструктором по умолчанию и вернуть ссылку на него.
-Value& operator[](const Key& k);
+    Value &operator[](const Key &k);
 
     // Возвращает значение по ключу. Бросает исключение при неудаче.
-    Value& at(const Key& k);
-    const Value& at(const Key& k) const;
+    Value &at(const Key &k);
+    const Value &at(const Key &k) const;
 
+    size_t size() const;
     bool empty() const;
 
-    friend bool operator==(const HashTable & a, const HashTable & b);
-    friend bool operator!=(const HashTable & a, const HashTable & b);
-*/
+    friend bool operator==(const HashTable &a, const HashTable &b);
+    friend bool operator!=(const HashTable &a, const HashTable &b);
 
+private:
+    std::vector<std::list<Tmp>> data;
+    size_t _size = 0;
+    size_t capacity = DEFAULT_CAPACITY;
+    size_t Hash(const Key &k) const;
+    void rehashing();
 };
 
 #endif //INC_17209_MARCHENKO_HASHTABLE_HASHTABLE_H
