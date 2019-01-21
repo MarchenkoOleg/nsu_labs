@@ -17,9 +17,9 @@ void HashTable::rehashing() {
     std::vector<std::list<Tmp>> buf = data;
     data.clear();
     _size = 0;
-    capacity *= PARTS;
+    capacity *= parts;
     data.resize(capacity, std::list<Tmp>());
-    for (size_t i = 0; i < (capacity / PARTS); ++i) {
+    for (size_t i = 0; i < (capacity / parts); ++i) {
         std::list<Tmp> &lst = buf.at(i);
         if (!lst.empty()) {
             for (auto it = lst.begin(); it != lst.end(); ++it) {
@@ -30,7 +30,7 @@ void HashTable::rehashing() {
 }
 
 HashTable::HashTable() {
-    data.resize(DEFAULT_CAPACITY, std::list<Tmp>());
+    data.resize(default_capacity, std::list<Tmp>());
 }
 
 HashTable::~HashTable() = default;
@@ -98,7 +98,7 @@ const Value &HashTable::at(const Key &k) const {
 
 void HashTable::clear() {
     _size = 0;
-    capacity = DEFAULT_CAPACITY;
+    capacity = default_capacity;
     data.clear();
 }
 
@@ -131,7 +131,7 @@ bool HashTable::insert(const Key &k, const Value &v) {
     }
     (data[pos]).push_front(Tmp(k, v));
     _size++;
-    if (_size > (capacity / PARTS)) {
+    if (_size > (capacity / parts)) {
         rehashing();
     }
     return true;

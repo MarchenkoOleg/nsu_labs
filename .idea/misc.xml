@@ -6,6 +6,9 @@
       <file path="$PROJECT_DIR$/libs" />
     </libraryRoots>
   </component>
+  <component name="GCoverageShowNonProjectSources">
+    <option name="showNonProjectSources" value="true" />
+  </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
