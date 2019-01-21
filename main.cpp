@@ -11,7 +11,6 @@ struct Val {
 };
 
 
-
 TEST(TemplateHashTableTest, Constructor) {
     try {
         TemplateHashTable<Key, Val> a;
