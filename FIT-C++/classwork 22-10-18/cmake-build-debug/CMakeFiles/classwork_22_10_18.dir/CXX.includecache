@@ -1,0 +1,88 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/march/CLionProjects/classwork 22-10-18/BattleCruiser.cpp
+BattleCruiser.h
+C:/Users/march/CLionProjects/classwork 22-10-18/BattleCruiser.h
+iostream
+-
+string
+-
+factory.h
+C:/Users/march/CLionProjects/classwork 22-10-18/factory.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/BattleCruiser.h
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Marine.cpp
+Marine.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Marine.h
+iostream
+-
+string
+-
+factory.h
+C:/Users/march/CLionProjects/classwork 22-10-18/factory.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Marine.h
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.cpp
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Zealot.cpp
+Zealot.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Zealot.h
+iostream
+-
+string
+-
+factory.h
+C:/Users/march/CLionProjects/classwork 22-10-18/factory.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/Zealot.h
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/factory.h
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+map
+-
+string
+-
+vector
+-
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+Marine.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Marine.h
+BattleCruiser.h
+C:/Users/march/CLionProjects/classwork 22-10-18/BattleCruiser.h
+Zealot.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Zealot.h
+
+C:/Users/march/CLionProjects/classwork 22-10-18/main.cpp
+assert.h
+-
+iostream
+-
+string
+-
+vector
+-
+factory.h
+C:/Users/march/CLionProjects/classwork 22-10-18/factory.h
+Unit.h
+C:/Users/march/CLionProjects/classwork 22-10-18/Unit.h
+

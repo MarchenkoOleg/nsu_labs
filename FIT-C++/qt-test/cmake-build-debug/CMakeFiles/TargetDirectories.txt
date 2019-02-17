@@ -1,0 +1,3 @@
+C:/Users/march/CLionProjects/qt-test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/march/CLionProjects/qt-test/cmake-build-debug/CMakeFiles/qt_test.dir
+C:/Users/march/CLionProjects/qt-test/cmake-build-debug/CMakeFiles/edit_cache.dir

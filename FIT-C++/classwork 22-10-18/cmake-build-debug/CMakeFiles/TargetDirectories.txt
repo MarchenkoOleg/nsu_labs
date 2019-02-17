@@ -1,0 +1,3 @@
+C:/Users/march/CLionProjects/classwork 22-10-18/cmake-build-debug/CMakeFiles/classwork_22_10_18.dir
+C:/Users/march/CLionProjects/classwork 22-10-18/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/march/CLionProjects/classwork 22-10-18/cmake-build-debug/CMakeFiles/rebuild_cache.dir

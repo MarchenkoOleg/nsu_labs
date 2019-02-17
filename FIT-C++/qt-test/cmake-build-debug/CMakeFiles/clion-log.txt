@@ -1,0 +1,8 @@
+C:\Users\march\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\183.4284.140\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=C:/Qt/Qt5.11.2/5.11.2/mingw53_32/lib/cmake -G "CodeBlocks - MinGW Makefiles" C:\Users\march\CLionProjects\qt-test
+CMake Error at CMakeLists.txt:16 (target_link_libraries):
+  Cannot specify link libraries for target "qt_test" which is not built by
+  this project.
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/march/CLionProjects/qt-test/cmake-build-debug/CMakeFiles/CMakeOutput.log".

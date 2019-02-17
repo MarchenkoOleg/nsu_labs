@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/march/CLionProjects/kruskal-v2/main.c
+stdio.h
+-
+malloc.h
+-
+stdlib.h
+-
+mst.h
+C:/Users/march/CLionProjects/kruskal-v2/mst.h
+
+C:/Users/march/CLionProjects/kruskal-v2/mst.c
+stdio.h
+-
+stdlib.h
+-
+mst.h
+C:/Users/march/CLionProjects/kruskal-v2/mst.h
+
+C:/Users/march/CLionProjects/kruskal-v2/mst.h
+

@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/march/CLionProjects/graph_dfs/main.c
+stdio.h
+-
+stdlib.h
+-
+malloc.h
+-
+stack.h
+C:/Users/march/CLionProjects/graph_dfs/stack.h
+tolological_sort.h
+C:/Users/march/CLionProjects/graph_dfs/tolological_sort.h
+
+C:/Users/march/CLionProjects/graph_dfs/stack.c
+stdio.h
+-
+malloc.h
+-
+stack.h
+C:/Users/march/CLionProjects/graph_dfs/stack.h
+
+C:/Users/march/CLionProjects/graph_dfs/stack.h
+
+C:/Users/march/CLionProjects/graph_dfs/tolological_sort.c
+tolological_sort.h
+C:/Users/march/CLionProjects/graph_dfs/tolological_sort.h
+
+C:/Users/march/CLionProjects/graph_dfs/tolological_sort.h
+stdio.h
+-
+stack.h
+C:/Users/march/CLionProjects/graph_dfs/stack.h
+

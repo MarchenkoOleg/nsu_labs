@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Oleg/CLionProjects/base64/base64coder.c
+base64coder.h
+C:/Users/Oleg/CLionProjects/base64/base64coder.h
+
+C:/Users/Oleg/CLionProjects/base64/base64coder.h
+stdio.h
+-
+
+C:/Users/Oleg/CLionProjects/base64/main.c
+stdio.h
+-
+stdlib.h
+-
+base64coder.h
+C:/Users/Oleg/CLionProjects/base64/base64coder.h
+
