@@ -1,11 +1,22 @@
-public class WordStatistics {
-    String word;
-    double counter;
+public class WordStatistics implements Comparable<WordStatistics> {
+    private String word;
+    private int count;
+
+    public WordStatistics(String word, int count) {
+        this.count = count;
+        this.word = word;
+    }
+
+    public int getCount() {
+        return count;
+    }
 
     public String getWord() {
         return word;
     }
-    public double getCounter() {
-        return counter;
+
+    @Override
+    public int compareTo(WordStatistics o) {
+        return 0; // TODO: make correct compare
     }
 }
