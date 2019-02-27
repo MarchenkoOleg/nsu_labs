@@ -1,8 +1,7 @@
 import java.util.HashMap;
-import java.util.Map;
 
 public class TextStatistics {
-    private Map<String, WordStatistics> words;
+    private HashMap<String, WordStatistics> words;
     private int count;
 
     public TextStatistics() {
@@ -15,5 +14,13 @@ public class TextStatistics {
             words.put(word, new WordStatistics(word, words.get(word).getCount() + 1));
         else
             words.put(word, new WordStatistics(word, 1));
+    }
+
+    public HashMap<String, WordStatistics> getWords() {
+        return words;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

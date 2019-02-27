@@ -17,6 +17,12 @@ public class WordStatistics implements Comparable<WordStatistics> {
 
     @Override
     public int compareTo(WordStatistics o) {
-        return 0; // TODO: make correct compare
+        //return this.count - o.count;
+        int result = Integer.compare(o.getCount(), getCount());
+        if (result == 0)
+            return getWord().compareTo(o.getWord());
+        else
+            return result;
     }
+
 }
