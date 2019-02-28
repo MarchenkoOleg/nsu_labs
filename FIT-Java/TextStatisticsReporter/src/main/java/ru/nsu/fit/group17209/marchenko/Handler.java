@@ -1,4 +1,5 @@
-import java.io.File;
+package ru.nsu.fit.group17209.marchenko;
+
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class Handler {
         out = output;
         this.report = report;
         stat = new TextStatistics();
+        start();
     }
 
     public void start() {

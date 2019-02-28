@@ -1,3 +1,5 @@
+package ru.nsu.fit.group17209.marchenko;
+
 import java.util.HashMap;
 
 public class TextStatistics {

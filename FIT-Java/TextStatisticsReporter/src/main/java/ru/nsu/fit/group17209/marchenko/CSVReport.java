@@ -1,3 +1,5 @@
+package ru.nsu.fit.group17209.marchenko;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;

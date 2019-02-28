@@ -1,3 +1,5 @@
+package ru.nsu.fit.group17209.marchenko;
+
 public class WordStatistics implements Comparable<WordStatistics> {
     private String word;
     private int count;
@@ -17,7 +19,6 @@ public class WordStatistics implements Comparable<WordStatistics> {
 
     @Override
     public int compareTo(WordStatistics o) {
-        //return this.count - o.count;
         int result = Integer.compare(o.getCount(), getCount());
         if (result == 0)
             return getWord().compareTo(o.getWord());

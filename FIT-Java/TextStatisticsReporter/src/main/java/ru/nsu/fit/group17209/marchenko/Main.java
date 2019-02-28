@@ -1,3 +1,5 @@
+package ru.nsu.fit.group17209.marchenko;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -11,15 +13,14 @@ public class Main {
         }
         String reportFileName;
         CSVReport report = new CSVReport();
-        File inFile = new File(/*"src/data.txt"*/ args[0]);
+        File inFile = new File(args[0]);
         InputStream in = new FileInputStream(inFile);
         if(args.length >= 2)
             reportFileName = args[1];
         else
             reportFileName = "src/report.csv";
         FileWriter out = new FileWriter(reportFileName);
-        Handler h = new Handler(in, out, report);
-        h.start();
+        new Handler(in, out, report);
 
     }
 }
