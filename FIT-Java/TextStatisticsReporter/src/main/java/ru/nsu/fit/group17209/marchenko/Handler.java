@@ -2,17 +2,16 @@ package ru.nsu.fit.group17209.marchenko;
 
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.Scanner;
 
 public class Handler {
-    private InputStream in;
     private TextStatistics stat;
     private StatisticsReport report;
     private Writer out;
+    private WordReader reader;
 
 
     public Handler(InputStream input, Writer output, StatisticsReport report) {
-        in = input;
+        reader = new WordReader(input);
         out = output;
         this.report = report;
         stat = new TextStatistics();
@@ -20,13 +19,10 @@ public class Handler {
     }
 
     public void start() {
-        Scanner sc = new Scanner(in);
-        while (sc.hasNext()) {
-            String str = sc.next();
+        String str;
+        while ((str = reader.nextWord()) != null) {
             stat.addWord(str);
         }
         report.generateReport(stat, report.prepareReport(stat), out);
     }
-
-
 }

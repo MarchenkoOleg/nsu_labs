@@ -17,13 +17,19 @@ public class WordStatistics implements Comparable<WordStatistics> {
         return word;
     }
 
+    public WordStatistics increment() {
+        count++;
+        return this;
+    }
+
     @Override
     public int compareTo(WordStatistics o) {
         int result = Integer.compare(o.getCount(), getCount());
-        if (result == 0)
+        if (result == 0) {
             return getWord().compareTo(o.getWord());
-        else
+        } else {
             return result;
+        }
     }
 
 }
