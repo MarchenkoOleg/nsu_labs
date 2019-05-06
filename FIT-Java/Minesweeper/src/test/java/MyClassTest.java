@@ -6,4 +6,8 @@ public class MyClassTest {
     public void firstTest() {
         Assert.assertTrue(true);
     }
+    @Test
+    public void secondTest() {
+        Assert.assertTrue(true);
+    }
 }
