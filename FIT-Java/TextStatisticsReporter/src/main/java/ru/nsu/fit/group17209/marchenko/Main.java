@@ -25,9 +25,11 @@ public class Main {
                 out.close();
             } catch (IOException e) {
                 System.err.println("Error while closing file: " + e.getLocalizedMessage());
+                return;
             }
         } catch (IOException e) {
             System.err.println("Error while opening to file: " + e.getLocalizedMessage());
+            return;
         }
     }
 }
