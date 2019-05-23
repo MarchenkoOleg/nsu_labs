@@ -1,3 +1,9 @@
+package MinesweeperGame;
+
+import MinesweeperModel.Model;
+import MinesweeperView.View;
+import MinesweeperModel.Cell;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -21,7 +27,7 @@ public class Controller extends MouseAdapter {
 
     public void startNewGame() {
         System.out.println("NewGame");
-        model.startGame(5,5,3);
+        model.startGame(9,9,10);
         view = new View(model, this);
     }
 
@@ -30,7 +36,6 @@ public class Controller extends MouseAdapter {
         switch (e.getButton()) {
             case MouseEvent.BUTTON1: //left
                 model.openCell(cell);
-                view.syncWithModel();
                 if(model.isWin()) {
                     view.showWinMessage();
                     startNewGame();
@@ -40,12 +45,14 @@ public class Controller extends MouseAdapter {
                 }
                 break;
             case MouseEvent.BUTTON3: //right
-                model.nextCellMark(cell.getPos_y(), cell.getPos_x());
-                view.syncWithModel();
+                model.nextCellMark(cell);
                 break;
             default:
                 break;
         }
     }
 
+    public static Model getModel() {
+        return model;
+    }
 }
