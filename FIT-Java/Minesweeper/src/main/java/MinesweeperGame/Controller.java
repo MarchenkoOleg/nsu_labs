@@ -12,6 +12,9 @@ public class Controller extends MouseAdapter {
     private static View view;
     private static Model model;
     private Cell cell;
+    private static int defaultHeight = 9;
+    private static int defaultWidth = 9;
+    private static int defaultMines = 10;
 
     public Controller(Model m) {
         model = m;
@@ -26,13 +29,18 @@ public class Controller extends MouseAdapter {
     }
 
     public void startNewGame() {
-        System.out.println("NewGame");
-        model.startGame(9,9,10);
+        model.startGame(defaultHeight, defaultWidth, defaultMines);
         view = new View(model, this);
+    }
+    public void startNewGame(int height, int width, int mines) {
+        defaultHeight = height;
+        defaultWidth = width;
+        defaultMines = mines;
+        startNewGame();
+
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println(cell.getPos_x() + " " + cell.getPos_y());
         switch (e.getButton()) {
             case MouseEvent.BUTTON1: //left
                 model.openCell(cell);
@@ -54,5 +62,9 @@ public class Controller extends MouseAdapter {
 
     public static Model getModel() {
         return model;
+    }
+
+    public View getView() {
+        return view;
     }
 }

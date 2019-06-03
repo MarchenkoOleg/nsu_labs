@@ -9,8 +9,6 @@ public class Cell {
     private boolean mined;
     private int counter;
 
-    //private static final String[] states = new String[] {"closed", "flagged", "questioned"};
-
     public Cell(int x, int y, boolean mine) {
         pos_x = x;
         pos_y = y;
@@ -23,32 +21,10 @@ public class Cell {
             state = state.getNext();
             listeners.notifyCellUpdated(this);
         }
-        /*
-        switch (state) {
-            case CLOSED:
-                listeners.notifyCellUpdated(this);
-                break;
-            case OPENED:
-                listeners.notifyCellOpened(this);
-                break;
-            case FLAGGED:
-                listeners.notifyCellFlagged(this);
-                break;
-            case QUESTIONED:
-                listeners.notifyCellQuestioned(this);
-                break;
-            default:
-                listeners.notifyCellUpdated(this);
-                break;
-
-        }
-         */
-
     }
 
     public boolean open() {
         if(state != CellState.FLAGGED) {
-            System.out.println("OPEN: " + state);
             state = CellState.OPENED;
             listeners.notifyCellUpdated(this);
             return true;
@@ -70,7 +46,6 @@ public class Cell {
 
     public void setMine() {
         mined = true;
-        listeners.notifyCellFlagged(this);
     }
 
     public void addListener(Object obj) {

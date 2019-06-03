@@ -1,11 +1,15 @@
 package MinesweeperModel;
 
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import MinesweeperGame.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Model {
@@ -15,12 +19,24 @@ public class Model {
     private int height;
     private int width;
     private int mines;
+    private int time;
+    private Timer timer;
+    TimerListeners listeners = new TimerListeners();
+    TimerTask timerTask;
     private boolean firstStep;
     private boolean gameOver;
     private Cell[][] cells;
 
+
     public Model() {
-        logger.info("Start game");
+
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                time++;
+                listeners.notifyTimerUpdated();
+            }
+        };
         startGame(9,9,10);
     }
 
@@ -37,6 +53,14 @@ public class Model {
                 cells[j][i] = new Cell(i, j, false);
             }
         }
+        listeners.clear();
+        time = 0;
+        if (timer!=null) timer.cancel();
+        timer = new Timer();
+        logger.debug("Timer created");
+
+
+        logger.info("Minesweeper: game started");
     }
 
     public Cell getCell(int x, int y) {
@@ -53,6 +77,7 @@ public class Model {
                 }
             }
         }
+        logger.info("Minesweeper: game winned");
         return true;
     }
 
@@ -63,8 +88,16 @@ public class Model {
     }
 
     public void openCell(Cell cell) {
-
+        logger.info("Minesweeper: try open cell(" + cell.getPos_x() + ", " + cell.getPos_y() + ")");
         if(firstStep) {
+            logger.debug("Schedule timer task");
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    time++;
+                    listeners.notifyTimerUpdated();
+                }
+            }, 0, 1000);
             cell.open();
             firstStep = false;
             generateMines();
@@ -74,12 +107,12 @@ public class Model {
         cell.setCounter(countMinesAroundCell(cell, neighbours));
 
         if(cell.open()) {
+
             if(cell.isMined()) {
                 gameOver = true;
-                System.out.println("MinesweeperGame over, cell: " + cell.getPos_x() + cell.getPos_y());
+
                 return;
             }
-
 
             if(cell.getCounter() == 0) {
 
@@ -106,6 +139,7 @@ public class Model {
                 }
             }
         }
+        logger.info("Minesweeper: mines generated");
     }
 
     private int countMinesAroundCell(Cell cell, ArrayList<Cell> neighbours) {
@@ -117,7 +151,6 @@ public class Model {
                 sum++;
             }
         }
-        //System.out.println("sum= " + sum);
         return sum;
     }
 
@@ -126,12 +159,10 @@ public class Model {
         ArrayList<Cell> neighbours = new ArrayList<Cell>();
         int x = cell.getPos_x();
         int y = cell.getPos_y();
-        //System.out.println("getCellNeighbours " + x + y);
         for(int i = y - 1; i <= y + 1; i++) {
             for(int j = x - 1; j <= x + 1; j++) {
                 if(!(i == x && j == y) && !((i < 0 || i >= width) || (j < 0 || j >= height))) {
                     neighbours.add(getCell(i, j));
-                    //System.out.println(i + " " + j);
                 }
             }
         }
@@ -141,4 +172,16 @@ public class Model {
     public int getWidth() {return width;}
 
     public int getHeight() {return height;}
+
+    public void addListener(Object obj) {
+        listeners.add(obj);
+    }
+
+    public void clearListeners() {
+        listeners.clear();
+    }
+
+    public int getTime() {
+        return time;
+    }
 }

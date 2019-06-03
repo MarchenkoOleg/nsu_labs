@@ -19,7 +19,9 @@ public class Button extends JButton implements CellListener {
         super();
         cell = c;
         button = new JButton("");
-        button.setPreferredSize(new Dimension(50, 50));
+        button.setPreferredSize(new Dimension(30, 30));
+        button.setMargin(new Insets(1,1,1,1));
+        button.setFont(new Font("Arial", Font.PLAIN, 12));
         controller = new Controller(cell);
         button.addMouseListener(controller);
     }
@@ -45,43 +47,24 @@ public class Button extends JButton implements CellListener {
 
     @Override
     public void cellUpdated(Cell cell) {
-        System.out.println("cellUpdated " + cell.getState() + " " + cell.getCounter());
         if(controller.getModel().isGameOver() && cell.isMined()) {
             config(Color.BLACK, "");
+            //controller.getView().syncWithModel();
+            return;
         }
         if(cell.getState() == CellState.CLOSED) {
             config("");
         } else if(cell.getState() == CellState.OPENED) {
             config(Color.LIGHT_GRAY, "");
-            if(cell.getCounter() > 0) {
-                config(Integer.toString(cell.getCounter()));
-            } else if(cell.isMined()) {
+            if(cell.isMined()) {
                 config(Color.RED);
+            } else if(cell.getCounter() > 0) {
+                config(Integer.toString(cell.getCounter()));
             }
         } else if(cell.getState() == CellState.FLAGGED) {
             config("P");
         } else if(cell.getState() == CellState.QUESTIONED) {
             config("?");
         }
-    }
-
-    @Override
-    public void cellOpened(Cell cell) {
-
-    }
-
-    @Override
-    public void cellFlagged(Cell cell) {
-        config("b");
-    }
-
-    @Override
-    public void cellQuestioned(Cell cell) {
-
-    }
-
-    @Override
-    public void cellClosed(Cell cell) {
-
     }
 }

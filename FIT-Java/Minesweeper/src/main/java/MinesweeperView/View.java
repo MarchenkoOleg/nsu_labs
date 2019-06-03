@@ -1,23 +1,28 @@
 package MinesweeperView;
 
 import MinesweeperGame.Controller;
+import MinesweeperModel.CellState;
 import MinesweeperModel.Model;
 import MinesweeperModel.Cell;
+import MinesweeperModel.TimerListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class View extends JPanel {
+public class View extends JPanel implements TimerListener {
 
     static private JFrame frame = new JFrame("Minesweeper");
     private JPanel view;
-    private JPanel menu;
+    private JTextField time;
     private Model model;
     private Button[][] field;
 
     public View(Model model, Controller controller) {
-
+        model.clearListeners();
+        model.addListener(this);
         frame.setContentPane(this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -26,53 +31,84 @@ public class View extends JPanel {
         this.model = model;
         controller.setView(this);
         view = new JPanel();
+        time = new JTextField("0");
+        time.setEnabled(false);
+
         view.setLayout(new GridLayout(model.getHeight(), model.getWidth()));
         field = new Button[model.getHeight()][model.getWidth()];
         buildButtons();
-        //frame.add(view, BorderLayout.SOUTH);
         frame.add(view);
-        menu = new JPanel();
-        JButton newMenu = new JButton("Новая игра");
-        JButton highScoresMenu = new JButton ("Рекорды");
-        JButton aboutMenu = new JButton ("About");
-        JButton exitMenu = new JButton ("Выход");
+
+        JMenuBar bar = new JMenuBar();
+
+        JMenu game = new JMenu("Game");
+
+        JMenu new_game_item = new JMenu("New game");
+        final JMenuItem beginner = new JMenuItem("Beginner");
+        final JMenuItem intermediate = new JMenuItem("Intermediate");
+        final JMenuItem expart = new JMenuItem("Expert");
+        final JMenuItem exit = new JMenuItem("Exit");
+        final JMenu help = new JMenu("Help");
+        final JMenuItem helpitem = new JMenuItem("Help");
+
+        ButtonGroup status = new ButtonGroup();
 
 
-        menu.add(newMenu);
-        menu.add(highScoresMenu);
-        menu.add(aboutMenu);
-        menu.add(exitMenu);
-        //frame.setJMenuBar(menu);
+        beginner.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        controller.startNewGame(9, 9, 10);
+                    }
+                });
+        intermediate.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        controller.startNewGame(14, 14, 20);
+                    }
+                });
+        expart.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        controller.startNewGame(20, 20, 40);
+                    }
+                });
+
+
+        exit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        helpitem.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Help");
+
+            }
+        });
+
+        frame.setJMenuBar(bar);
+
+        status.add(beginner);
+        status.add(intermediate);
+        status.add(expart);
+
+        game.add(new_game_item);
+        game.addSeparator();
+        new_game_item.add(beginner);
+        new_game_item.add(intermediate);
+        new_game_item.add(expart);
+        game.addSeparator();
+        game.add(exit);
+        help.add(helpitem);
+
+        bar.add(game);
+        bar.add(help);
+        frame.add(time);
         frame.pack();
 
-    }
-
-    public void syncWithModel() {
-        /*
-        for (int i = 0; i < model.getHeight(); i++) {
-            for (int j = 0; j < model.getWidth(); j++) {
-                MinesweeperModel.MinesweeperModel.Cell cell = model.getCell(i, j);
-                MinesweeperView.MinesweeperView.Button btn = field[i][j];
-
-                if(model.isGameOver() && cell.isMined()) {
-                    btn.config(Color.BLACK, "");
-                }
-                if(cell.getState() == MinesweeperModel.MinesweeperModel.CellState.CLOSED) {
-                    btn.config("");
-                } else if(cell.getState() == MinesweeperModel.MinesweeperModel.CellState.OPENED) {
-                    btn.config(Color.LIGHT_GRAY, "");
-                    if(cell.getCounter() > 0) {
-                        btn.config(Integer.toString(cell.getCounter()));
-                    } else if(cell.isMined()) {
-                        btn.config(Color.RED);
-                    }
-                } else if(cell.getState() == MinesweeperModel.MinesweeperModel.CellState.FLAGGED) {
-                    btn.config("P");
-                } else if(cell.getState() == MinesweeperModel.MinesweeperModel.CellState.QUESTIONED) {
-                    btn.config("?");
-                }
-            }
-        }*/
     }
 
     private void buildButtons() {
@@ -80,17 +116,42 @@ public class View extends JPanel {
         for (int i = 0; i < model.getHeight(); i++) {
             for (int j = 0; j < model.getWidth(); j++) {
                 Cell cell = model.getCell(i, j);
-                //System.out.println(cell.getState());
                 Button button = new Button(cell);
                 field[i][j] = button;
                 this.view.add(button.getButton());
                 cell.clearListeners();
                 cell.addListener(button);
-                System.out.println("Listener added");
             }
         }
 
 
+    }
+
+    public void syncWithModel() {
+
+        for (int i = 0; i < model.getHeight(); i++) {
+            for (int j = 0; j < model.getWidth(); j++) {
+                Cell cell = model.getCell(i, j);
+                Button btn = field[i][j];
+                if(model.isGameOver() && cell.isMined()) {
+                    btn.config(Color.BLACK, "");
+                }
+                if(cell.getState() == CellState.CLOSED) {
+                    btn.config("");
+                } else if(cell.getState() == CellState.OPENED) {
+                    btn.config(Color.LIGHT_GRAY, "");
+                    if(cell.getCounter() > 0) {
+                        btn.config(Integer.toString(cell.getCounter()));
+                    } else if(cell.isMined()) {
+                        btn.config(Color.RED);
+                    }
+                } else if(cell.getState() == CellState.FLAGGED) {
+                    btn.config("P");
+                } else if(cell.getState() == CellState.QUESTIONED) {
+                    btn.config("?");
+                }
+            }
+        }
     }
 
     public void showWinMessage() {
@@ -105,4 +166,8 @@ public class View extends JPanel {
 
     }
 
+    @Override
+    public void TimerUpdated() {
+        SwingUtilities.invokeLater(() -> time.setText(Integer.toString(model.getTime())));
+    }
 }
